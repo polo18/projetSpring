@@ -1,4 +1,4 @@
-package org.example.demo.ticket.business.contract_impl;
+package org.example.demo.ticket.business.contract;
 
 import java.util.List;
 

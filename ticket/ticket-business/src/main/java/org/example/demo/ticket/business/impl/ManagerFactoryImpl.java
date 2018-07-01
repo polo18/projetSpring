@@ -1,15 +1,15 @@
-package org.example.demo.ticket.business;
+package org.example.demo.ticket.business.impl;
 
 import javax.inject.Named;
 import javax.inject.Inject;
 
-import org.example.demo.ticket.business.contract_impl.*;
+import org.example.demo.ticket.business.contract.*;
 import org.example.demo.ticket.business.impl.manager.*;
 
 // La classe ManagerFactory devient ManagerFactoryImpl
 // et implémente l'interface ManagerFactory
 @Named
-public class ManagerFactory implements  IManagerFactory{
+public class ManagerFactoryImpl implements  IManagerFactory{
 
     @Inject
     private IProjetManager projetManager;

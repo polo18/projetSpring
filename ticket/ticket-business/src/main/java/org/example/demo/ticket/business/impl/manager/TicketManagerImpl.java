@@ -11,7 +11,8 @@ import org.example.demo.ticket.model.bean.ticket.Evolution;
 import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.exception.NotFoundException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
-import org.example.demo.ticket.business.contract_impl.ITicketManager;
+import org.example.demo.ticket.business.contract.ITicketManager;
+import org.example.demo.ticket.business.impl.manager.AbstractManager;
 
 /**
  * Manager des beans du package Ticket.
@@ -21,7 +22,7 @@ import org.example.demo.ticket.business.contract_impl.ITicketManager;
 // La classe TicketManager devient TicketManagerImpl
 // et implémente l'interface TicketManager
 @Named
-public class TicketManagerImpl implements ITicketManager {
+public class TicketManagerImpl extends AbstractManager implements ITicketManager {
 
     /**
      * Cherche et renvoie le {@link Ticket} numéro {@code pNumero}

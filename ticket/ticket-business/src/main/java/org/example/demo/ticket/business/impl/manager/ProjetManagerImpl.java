@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.inject.Named;
 
-import org.example.demo.ticket.business.contract_impl.IProjetManager;
+import org.example.demo.ticket.business.impl.manager.AbstractManager;
+import org.example.demo.ticket.business.contract.IProjetManager;
 import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.exception.NotFoundException;
 
@@ -20,7 +21,7 @@ import org.example.demo.ticket.model.exception.NotFoundException;
 // et implémente l'interface ProjetManager
 
 @Named("projetManager")
-public class ProjetManagerImpl implements IProjetManager {
+public class ProjetManagerImpl extends AbstractManager implements IProjetManager {
 
     /**
      * Renvoie le projet demandé
