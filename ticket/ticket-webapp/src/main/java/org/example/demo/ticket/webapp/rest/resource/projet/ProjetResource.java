@@ -8,7 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.example.demo.ticket.webapp.rest.resource.abstracte.*;
-import org.example.demo.ticket.business.contract_impl.IProjetManager;
+import org.example.demo.ticket.business.contract.manager.IProjetManager;
 import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.exception.NotFoundException;
 

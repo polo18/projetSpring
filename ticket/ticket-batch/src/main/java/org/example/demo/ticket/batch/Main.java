@@ -6,7 +6,7 @@ import org.example.demo.ticket.model.exception.TechnicalException;
 
 
 import org.example.demo.ticket.batch.SpringConfiguration;
-import org.example.demo.ticket.business.contract_impl.IManagerFactory;
+import org.example.demo.ticket.business.contract.IManagerFactory;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

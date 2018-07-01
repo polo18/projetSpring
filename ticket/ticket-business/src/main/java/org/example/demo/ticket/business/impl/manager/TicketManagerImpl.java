@@ -11,7 +11,7 @@ import org.example.demo.ticket.model.bean.ticket.Evolution;
 import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.exception.NotFoundException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
-import org.example.demo.ticket.business.contract.ITicketManager;
+import org.example.demo.ticket.business.contract.manager.ITicketManager;
 import org.example.demo.ticket.business.impl.manager.AbstractManager;
 
 /**

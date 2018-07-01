@@ -11,7 +11,7 @@
 
 
     <!-- ===== DaoFactory ===== -->
-    <bean id="daoFactory" class="org.example.demo.ticket.business.impl.DaoFactory">
+    <bean id="daoFactory" class="org.example.demo.ticket.consumer.impl.IDaoFactory">
         <property name="projetDao" ref="projetDao"/>
         <property name="ticketDao" ref="ticketDao"/>
     </bean>

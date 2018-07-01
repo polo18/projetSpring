@@ -1,6 +1,7 @@
 package org.example.demo.ticket.webapp.rest.resource.ticket;
 
 import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -8,10 +9,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.example.demo.ticket.business.impl.manager.TicketManagerImpl;
+import org.example.demo.ticket.business.contract.manager.ITicketManager;
+import org.example.demo.ticket.webapp.rest.resource.abstracte.AbstractResource;
 import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.exception.NotFoundException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
+
 
 
 /**
@@ -21,7 +24,7 @@ import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
  */
 @Path("/tickets")
 @Produces(MediaType.APPLICATION_JSON)
-public class TicketResource {
+public class TicketResource extends AbstractResource {
 
 
     /**
@@ -34,7 +37,7 @@ public class TicketResource {
     @GET
     @Path("{numero}")
     public Ticket get(@PathParam("numero") Long pNumero) throws NotFoundException {
-        TicketManagerImpl vTicketManager = new TicketManagerImpl();
+        ITicketManager vTicketManager = getManagerFactory().getTicketManager();
         Ticket vTicket = vTicketManager.getTicket(pNumero);
         return vTicket;
     }
@@ -48,9 +51,8 @@ public class TicketResource {
     @GET
     @Path("search")
     public List<Ticket> search(@QueryParam("projetId") Integer pProjetId) {
-        TicketManagerImpl vTicketManager = new TicketManagerImpl();
-        List<Ticket> vList = vTicketManager.getListTicket(new RechercheTicket()
-                                                              .setProjetId(pProjetId));
+        ITicketManager vTicketManager = getManagerFactory().getTicketManager();
+        List<Ticket> vList = vTicketManager.getListTicket(new RechercheTicket().setProjetId(pProjetId));
         return vList;
     }
 }
