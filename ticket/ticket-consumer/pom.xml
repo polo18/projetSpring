@@ -16,7 +16,6 @@
 
     <!-- ===== Informations Maven ===== -->
     <artifactId>ticket-consumer</artifactId>
-
     <!-- ===== Informations générales ===== -->
     <name>${projectName} - Consumer</name>
     <url>http://maven.apache.org</url>
@@ -42,7 +41,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
         <!-- ===== Tests ===== -->
         <dependency>
             <groupId>junit</groupId>

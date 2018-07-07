@@ -7,12 +7,21 @@ import javax.inject.Named;
 
 import org.example.demo.ticket.model.bean.projet.Projet;
 import org.example.demo.ticket.model.bean.ticket.Bug;
+import org.example.demo.ticket.model.bean.ticket.Commentaire;
 import org.example.demo.ticket.model.bean.ticket.Evolution;
+import org.example.demo.ticket.model.bean.ticket.HistoriqueStatut;
 import org.example.demo.ticket.model.bean.ticket.Ticket;
+import org.example.demo.ticket.model.bean.ticket.TicketStatut;
+import org.example.demo.ticket.model.bean.utilisateur.Utilisateur;
 import org.example.demo.ticket.model.exception.NotFoundException;
+import org.example.demo.ticket.model.exception.TechnicalException;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
 import org.example.demo.ticket.business.contract.manager.ITicketManager;
 import org.example.demo.ticket.business.impl.manager.AbstractManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * Manager des beans du package Ticket.
@@ -80,5 +89,33 @@ public class TicketManagerImpl extends AbstractManager implements ITicketManager
         // Je n'ai pas encore codé la DAO
         // Je mets juste un code temporaire pour commencer le cours...
         return 42;
+    }
+    
+    @Override
+    public HistoriqueStatut changerStatut(Ticket pTicket, TicketStatut pNewStatut,
+                        Utilisateur pUtilisateur, Commentaire pCommentaire) {
+
+        TransactionTemplate vTransactionTemplate = 
+            new TransactionTemplate(getPlatformTransactionManager());
+
+        HistoriqueStatut vHistoriaueStatut = vTransactionTemplate.execute(
+            new TransactionCallback<HistoriqueStatut>() {
+                @Override
+                public HistoriqueStatut doInTransaction(TransactionStatus status) {
+                    HistoriqueStatut vHistoriaueStatut = null;
+                    TicketStatut vOldStatut = pTicket.getStatut();
+                    pTicket.setStatut(pNewStatut);
+                    try {
+                        getDaoFactory().getTicketDao().updateTicket(pTicket);
+                        vHistoriaueStatut = new HistoriqueStatut();
+                        // TODO Ajout de la ligne d'historique + commentaire ...     
+                    } catch (TechnicalException vEx) {
+                        //pTransactionStatus.setRollbackOnly();
+                        //pTicket.setStatut(vOldStatut);
+                   }
+                   return vHistoriaueStatut;
+                }
+            });        
+        return vHistoriaueStatut;
     }
 }

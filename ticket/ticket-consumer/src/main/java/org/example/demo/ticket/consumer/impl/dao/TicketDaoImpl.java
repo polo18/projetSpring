@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.example.demo.ticket.consumer.contract.dao.ITicketDao;
 import org.example.demo.ticket.consumer.impl.rowmapper.ticket.TicketStatutRM;
+import org.example.demo.ticket.model.bean.ticket.Ticket;
 import org.example.demo.ticket.model.bean.ticket.TicketStatut;
 import org.example.demo.ticket.model.recherche.ticket.RechercheTicket;
 import org.springframework.dao.DuplicateKeyException;
@@ -24,6 +25,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 public class TicketDaoImpl extends AbstractDaoImpl implements ITicketDao{
        
     private static final Log LOGGER = LogFactory.getLog(TicketDaoImpl.class);
+
        
     @Override
     public int getCountTicket(RechercheTicket pRechercheTicket) {
@@ -59,6 +61,7 @@ public class TicketDaoImpl extends AbstractDaoImpl implements ITicketDao{
         return vListStatut;
     }
 
+    @Override
     public void updateTicketStatut(TicketStatut pTicketStatut) {
 
             String vSQL = "UPDATE statut SET libelle = :libelle WHERE id = :id";
@@ -73,6 +76,7 @@ public class TicketDaoImpl extends AbstractDaoImpl implements ITicketDao{
             int vNbrLigneMaJ = vJdbcTemplate.update(vSQL, vParams);
     }
     
+    @Override
     public void insertTicketStatut(TicketStatut pTicketStatut) {
 
         String vSQL = "INSERT INTO statut (id, libelle) VALUES (:id, :libelle)";
@@ -88,5 +92,10 @@ public class TicketDaoImpl extends AbstractDaoImpl implements ITicketDao{
         } catch (DuplicateKeyException vEx) {
             LOGGER.error("Le TicketStatut existe déjà ! id=" + pTicketStatut.getId(), vEx);    
         }
+    }
+    
+    @Override
+    public void updateTicket(Ticket pTicket){
+        
     }
 }
